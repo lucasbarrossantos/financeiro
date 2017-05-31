@@ -8,6 +8,7 @@
 <section layout:fragment="conteudo">
     <div class="container">
         <div class="section">
+            <div layout:include="/fragments/MensagemInfo"></div>
 
             <div class="row">
                 <div class="col s12 m12">
@@ -102,5 +103,8 @@
         </div>
     </div>
 </section>
+<th:block layout:fragment="javascript-extra">
+    <script th:src="@{/javascript/financeiro.js}"></script>
+</th:block>
 
 </html>

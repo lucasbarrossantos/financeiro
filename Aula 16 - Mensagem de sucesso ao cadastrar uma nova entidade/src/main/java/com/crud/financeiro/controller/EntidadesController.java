@@ -5,12 +5,12 @@ import com.crud.financeiro.repository.Entidades;
 import com.crud.financeiro.service.EntidadesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -32,16 +32,15 @@ public class EntidadesController {
     }
 
     @RequestMapping(value = "/novo", method = RequestMethod.POST)
-    public String salvar(@Valid Entidade entidade, BindingResult result){
+    public String salvar(@Valid Entidade entidade, BindingResult result, RedirectAttributes attributes){
 
         if (result.hasErrors()){
             // TODO: Mostrar mensagem de erro
             return novo(entidade);
         }
 
-        System.out.println("Entidade: " + entidade.toString());
+        attributes.addFlashAttribute("mensagem", "Entidade salva com sucesso");
         entidadesService.salvar(entidade);
-
         return "redirect:/entidades/novo";
     }
 
